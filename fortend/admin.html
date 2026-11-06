@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html class="dark" lang="vi">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+  <meta content="mobile_tab" name="shell-type"/>
+  <title>Quản Trị Sân Bóng | Sân Bóng Nhà Máy Nước Yên Phú</title>
+
+  <!-- Google Fonts & Material Symbols -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Anybody:ital,wght@0,700;0,800;0,900;1,800&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+
+  <!-- Tailwind CSS Play CDN & Shared Config -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/config.js"></script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body class="bg-surface font-body-md text-on-surface antialiased flex flex-col selection:bg-primary selection:text-on-primary">
+  <!-- TOP FIXED HEADER -->
+  <header class="fixed top-0 w-full z-50 pt-safe bg-surface-container-lowest/85 backdrop-blur-xl shadow-[0_1px_16px_rgba(0,0,0,0.5)]">
+    <div class="h-20 px-margin flex items-center justify-between gap-space-sm">
+      <div class="flex items-center gap-space-sm min-w-0 flex-1">
+        <img alt="Logo Sói Vàng Nhà Máy Nước Yên Phú" class="h-8 w-auto object-contain flex-shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1UgUVqW7nvL3HgBco9Q7ra3lHM_KD1IEnJk8qc5pfvg6pyTV2ATZ0PRjJbtuRA_Swt-3KflxcL5LaCtlQUotr6Ks6ZFABfHaCBDn0x_4SpCodf-Dd_Ixmc4vN9my_QYMPaCGP_k8S4nr9a8d3ya158-hF7-fx-0BKmqAJApwIFcZlop46MVJJ1-dC_1zMtCnxZz9CCAGUkutP7FKSHxM3EFPVGBbb0eVw54G5MIqoXS"/>
+        <div class="flex flex-col min-w-0">
+          <div class="flex items-center gap-space-xs">
+            <span class="font-headline-sm text-headline-sm text-primary uppercase tracking-tight truncate">Nhà Máy Nước</span>
+            <span class="text-outline font-label-sm text-label-sm">•</span>
+            <span class="font-headline-sm text-headline-sm text-on-surface uppercase tracking-tight truncate">Yên Phú</span>
+          </div>
+          <div class="flex items-center gap-1.5 mt-0.5">
+            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm tracking-wide">
+              <span class="material-symbols-outlined text-[11px] text-primary">location_on</span>
+              <span class="truncate max-w-[130px]">Bình Phú, Yên Phú, Hưng Yên</span>
+            </span>
+            <span class="font-label-sm text-label-sm text-outline-variant hidden sm:inline">| Quản Trị</span>
+          </div>
+        </div>
+      </div>
+      <div class="flex items-center gap-space-xs flex-shrink-0">
+        <a aria-label="Hotline Đặt Sân" class="min-w-[44px] min-h-[44px] rounded-full flex items-center justify-center text-primary bg-surface-container-high/80 hover:bg-surface-container-highest transition-colors" href="tel:0988123456">
+          <span class="material-symbols-outlined text-[20px]">call</span>
+        </a>
+        <a aria-label="Thông báo" class="relative min-w-[44px] min-h-[44px] rounded-full flex items-center justify-center text-on-surface bg-surface-container-high/80 hover:bg-surface-container-highest transition-colors" href="#">
+          <span class="material-symbols-outlined text-[20px]">notifications</span>
+          <span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-primary ring-2 ring-surface-container-lowest animate-pulse"></span>
+        </a>
+        <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-[0_0_12px_rgba(133,224,47,0.35)] flex-shrink-0 ml-1">
+          <span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN VIEWPORT -->
+  <main class="flex flex-col relative w-full pt-20 pb-24 bg-surface min-h-screen">
+    <div class="flex flex-col w-full space-y-space-md px-margin">
+      <!-- ADMIN PROFILE & VENUE BANNER -->
+      <div class="relative overflow-hidden rounded-lg bg-surface-container p-space-md shadow-xl">
+        <div class="absolute -right-12 -top-12 w-48 h-48 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="flex items-center gap-space-md relative z-10">
+          <div class="relative w-16 h-16 rounded-full bg-surface-container-highest p-1 flex-shrink-0 shadow-md">
+            <img alt="Logo Sói Vàng Nhà Máy Nước Yên Phú" class="w-full h-full object-contain rounded-full" src="https://lh3.googleusercontent.com/aida/AEtjO1UgUVqW7nvL3HgBco9Q7ra3lHM_KD1IEnJk8qc5pfvg6pyTV2ATZ0PRjJbtuRA_Swt-3KflxcL5LaCtlQUotr6Ks6ZFABfHaCBDn0x_4SpCodf-Dd_Ixmc4vN9my_QYMPaCGP_k8S4nr9a8d3ya158-hF7-fx-0BKmqAJApwIFcZlop46MVJJ1-dC_1zMtCnxZz9CCAGUkutP7FKSHxM3EFPVGBbb0eVw54G5MIqoXS"/>
+            <span class="absolute bottom-0 right-0 w-4 h-4 rounded-full bg-primary flex items-center justify-center">
+              <span class="w-2 h-2 rounded-full bg-on-primary animate-ping"></span>
+            </span>
+          </div>
+          <div class="flex flex-col min-w-0 flex-1">
+            <div class="flex items-center gap-space-xs flex-wrap">
+              <span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm uppercase tracking-wider">
+                Chủ Sân / Điều Hành
+              </span>
+              <span class="font-label-sm text-label-sm text-outline flex items-center gap-0.5">
+                <span class="material-symbols-outlined text-[12px] text-primary" style="font-variation-settings: 'FILL' 1;">verified</span>
+                Live Hub
+              </span>
+            </div>
+            <h1 class="font-headline-md text-headline-md text-on-surface truncate mt-0.5">
+              Admin Sân Yên Phú
+            </h1>
+            <p class="font-body-sm text-body-sm text-on-surface-variant truncate">
+              Cụm Sân Cỏ Nhân Tạo • Bình Phú, Yên Phú
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TODAY STATS OVERVIEW -->
+      <div class="grid grid-cols-2 gap-space-sm" id="admin-dashboard-stats">
+        <!-- Revenue Projected -->
+        <div class="col-span-2 rounded-lg bg-surface-container-high p-space-md shadow-md relative overflow-hidden">
+          <div class="flex items-center justify-between">
+            <span class="font-label-md text-label-md text-on-surface-variant uppercase flex items-center gap-1">
+              <span class="material-symbols-outlined text-[16px] text-primary">payments</span>
+              Doanh thu dự kiến hôm nay
+            </span>
+            <span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-primary-container text-on-primary-container" id="stat-slots-count">
+              -- Khung giờ
+            </span>
+          </div>
+          <div class="mt-2 flex items-baseline justify-between">
+            <div class="font-headline-lg-mobile text-headline-lg-mobile text-primary tracking-tight" id="stat-projected-revenue">
+              0<span class="font-body-md text-body-md text-on-surface-variant ml-1 font-normal">đ</span>
+            </div>
+            <div class="text-right">
+              <span class="font-label-sm text-label-sm text-secondary" id="stat-collected-revenue">Đã thu: 0đ</span>
+            </div>
+          </div>
+          <!-- Mini Progress bar -->
+          <div class="w-full bg-surface-container-highest rounded-full h-1.5 mt-3 overflow-hidden">
+            <div class="bg-primary h-1.5 rounded-full" id="stat-progress-bar" style="width: 50%"></div>
+          </div>
+        </div>
+
+        <!-- Pitch 1 & 2 quick metrics -->
+        <div class="rounded-lg bg-surface-container p-space-sm shadow-sm flex flex-col justify-between" id="metric-pitch-1">
+          <div class="flex items-center justify-between">
+            <span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Sân 1 (7v7)</span>
+            <span class="w-2 h-2 rounded-full bg-primary"></span>
+          </div>
+          <div class="my-2">
+            <div class="font-headline-sm text-headline-sm text-on-surface" id="stat-pitch-1-count">-- Lượt</div>
+            <div class="font-body-sm text-body-sm text-outline">Đang hoạt động</div>
+          </div>
+          <div class="font-label-sm text-label-sm text-secondary-fixed-dim bg-surface-container-lowest px-2 py-1 rounded text-center">
+            Mặt cỏ chuẩn FIFA
+          </div>
+        </div>
+
+        <div class="rounded-lg bg-surface-container p-space-sm shadow-sm flex flex-col justify-between" id="metric-pitch-2">
+          <div class="flex items-center justify-between">
+            <span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Sân 2 (5-7v7)</span>
+            <span class="w-2 h-2 rounded-full bg-primary"></span>
+          </div>
+          <div class="my-2">
+            <div class="font-headline-sm text-headline-sm text-on-surface" id="stat-pitch-2-count">-- Lượt</div>
+            <div class="font-body-sm text-body-sm text-outline">Đang hoạt động</div>
+          </div>
+          <div class="font-label-sm text-label-sm text-tertiary-fixed bg-surface-container-lowest px-2 py-1 rounded text-center">
+            Đèn LED ban đêm
+          </div>
+        </div>
+      </div>
+
+      <!-- ACTION & PITCH FILTER BAR -->
+      <div class="flex flex-col gap-space-sm">
+        <button class="w-full py-3.5 px-space-md rounded-full bg-primary text-on-primary font-headline-sm text-headline-sm flex items-center justify-center gap-space-xs shadow-lg active:scale-95 transition-transform" id="btnQuickAdd" type="button">
+          <span class="material-symbols-outlined text-[22px]">add_circle</span>
+          <span>Thêm Đặt Sân Trực Tiếp</span>
+        </button>
+
+        <!-- Pitch Filter Tabs -->
+        <div class="flex items-center justify-between p-1 bg-surface-container-lowest rounded-full shadow-inner">
+          <button class="pitch-filter-btn flex-1 py-2 rounded-full font-label-md text-label-md text-center bg-primary text-on-primary transition-colors" data-filter="all" onclick="setPitchFilter('all')" type="button">
+            Tất Cả (9)
+          </button>
+          <button class="pitch-filter-btn flex-1 py-2 rounded-full font-label-md text-label-md text-center text-on-surface-variant hover:text-on-surface transition-colors" data-filter="san1" onclick="setPitchFilter('san1')" type="button">
+            Sân 1 (5)
+          </button>
+          <button class="pitch-filter-btn flex-1 py-2 rounded-full font-label-md text-label-md text-center text-on-surface-variant hover:text-on-surface transition-colors" data-filter="san2" onclick="setPitchFilter('san2')" type="button">
+            Sân 2 (4)
+          </button>
+        </div>
+      </div>
+
+      <!-- BOOKINGS LIST TODAY -->
+      <div class="flex flex-col space-y-space-sm" id="bookings-list-container">
+        <div class="flex items-center justify-between px-1">
+          <h2 class="font-headline-sm text-headline-sm text-on-surface uppercase tracking-wide flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-primary text-[20px]">sports_soccer</span>
+            Điều Phối Hôm Nay
+          </h2>
+          <span class="font-label-sm text-label-sm text-outline">Chạm để xử lý</span>
+        </div>
+
+        <!-- Booking 1: YP-801 -->
+        <div class="booking-card rounded-lg bg-surface-container p-space-md shadow-md flex flex-col space-y-space-sm" data-pitch="san1">
+          <div class="flex items-start justify-between gap-space-sm">
+            <div class="flex flex-col">
+              <div class="flex items-center gap-2">
+                <span class="font-headline-sm text-headline-sm text-primary">#YP-801</span>
+                <span class="px-2 py-0.5 rounded-full bg-surface-container-highest text-on-surface font-label-sm text-label-sm">
+                  Sân 1
+                </span>
+              </div>
+              <span class="font-headline-sm text-headline-sm text-on-surface mt-1">17:00 - 18:00</span>
+              <div class="flex items-center gap-1 text-on-surface-variant font-body-sm text-body-sm mt-0.5">
+                <span class="material-symbols-outlined text-[15px] text-secondary">person</span>
+                <span class="font-semibold text-on-surface">Anh Hải</span>
+                <span class="text-outline">•</span>
+                <a class="text-primary hover:underline" href="tel:0982111000">0982.111.xxx</a>
+              </div>
+            </div>
+            <div class="text-right flex flex-col items-end">
+              <span class="font-headline-sm text-headline-sm text-on-surface">300.000đ</span>
+              <span class="mt-1 px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm">
+                Đã cọc 100k
+              </span>
+              <span class="text-outline font-label-sm text-label-sm mt-1">Còn thiếu: 200.000đ</span>
+            </div>
+          </div>
+          <div class="grid grid-cols-3 gap-space-xs pt-1">
+            <button class="py-2.5 rounded-full bg-primary text-on-primary font-label-md text-label-md flex items-center justify-center gap-1 shadow-sm active:scale-95 transition-transform" onclick="handleAction('checkin', 'YP-801')" type="button">
+              <span class="material-symbols-outlined text-[16px]">how_to_reg</span> Check-in
+            </button>
+            <button class="py-2.5 rounded-full bg-surface-container-highest text-on-surface font-label-md text-label-md flex items-center justify-center gap-1 hover:bg-surface-bright active:scale-95 transition-transform" onclick="handleAction('edit', 'YP-801')" type="button">
+              <span class="material-symbols-outlined text-[16px]">edit</span> Sửa
+            </button>
+            <button class="py-2.5 rounded-full bg-error-container text-on-error-container font-label-md text-label-md flex items-center justify-center gap-1 hover:opacity-90 active:scale-95 transition-transform" onclick="handleAction('cancel', 'YP-801')" type="button">
+              <span class="material-symbols-outlined text-[16px]">cancel</span> Hủy
+            </button>
+          </div>
+        </div>
+
+        <!-- Booking 2: YP-802 -->
+        <div class="booking-card rounded-lg bg-surface-container p-space-md shadow-md flex flex-col space-y-space-sm" data-pitch="san1">
+          <div class="flex items-start justify-between gap-space-sm">
+            <div class="flex flex-col">
+              <div class="flex items-center gap-2">
+                <span class="font-headline-sm text-headline-sm text-primary">#YP-802</span>
+                <span class="px-2 py-0.5 rounded-full bg-surface-container-highest text-on-surface font-label-sm text-label-sm">
+                  Sân 1
+                </span>
+              </div>
+              <span class="font-headline-sm text-headline-sm text-on-surface mt-1">18:00 - 20:00 (2h)</span>
+              <div class="flex items-center gap-1 text-on-surface-variant font-body-sm text-body-sm mt-0.5">
+                <span class="material-symbols-outlined text-[15px] text-secondary">person</span>
+                <span class="font-semibold text-on-surface">Anh Tuấn</span>
+                <span class="text-outline">•</span>
+                <a class="text-primary hover:underline" href="tel:0912345000">0912.345.xxx</a>
+              </div>
+            </div>
+            <div class="text-right flex flex-col items-end">
+              <span class="font-headline-sm text-headline-sm text-on-surface">760.000đ</span>
+              <span class="mt-1 px-2.5 py-0.5 rounded-full bg-tertiary-container text-on-tertiary-container font-label-sm text-label-sm">
+                Chờ thanh toán
+              </span>
+              <span class="text-outline font-label-sm text-label-sm mt-1">Giờ cao điểm</span>
+            </div>
+          </div>
+          <div class="grid grid-cols-3 gap-space-xs pt-1">
+            <button class="py-2.5 rounded-full bg-primary text-on-primary font-label-md text-label-md flex items-center justify-center gap-1 shadow-sm active:scale-95 transition-transform" onclick="handleAction('checkin', 'YP-802')" type="button">
+              <span class="material-symbols-outlined text-[16px]">how_to_reg</span> Check-in
+            </button>
+            <button class="py-2.5 rounded-full bg-surface-container-highest text-on-surface font-label-md text-label-md flex items-center justify-center gap-1 hover:bg-surface-bright active:scale-95 transition-transform" onclick="handleAction('edit', 'YP-802')" type="button">
+              <span class="material-symbols-outlined text-[16px]">edit</span> Sửa
+            </button>
+            <button class="py-2.5 rounded-full bg-error-container text-on-error-container font-label-md text-label-md flex items-center justify-center gap-1 hover:opacity-90 active:scale-95 transition-transform" onclick="handleAction('cancel', 'YP-802')" type="button">
+              <span class="material-symbols-outlined text-[16px]">cancel</span> Hủy
+            </button>
+          </div>
+        </div>
+
+        <!-- Booking 3: YP-803 -->
+        <div class="booking-card rounded-lg bg-surface-container p-space-md shadow-md flex flex-col space-y-space-sm" data-pitch="san2">
+          <div class="flex items-start justify-between gap-space-sm">
+            <div class="flex flex-col">
+              <div class="flex items-center gap-2">
+                <span class="font-headline-sm text-headline-sm text-primary">#YP-803</span>
+                <span class="px-2 py-0.5 rounded-full bg-surface-container-highest text-on-surface font-label-sm text-label-sm">
+                  Sân 2
+                </span>
+              </div>
+              <span class="font-headline-sm text-headline-sm text-on-surface mt-1">18:00 - 19:30</span>
+              <div class="flex items-center gap-1 text-on-surface-variant font-body-sm text-body-sm mt-0.5">
+                <span class="material-symbols-outlined text-[15px] text-secondary">groups</span>
+                <span class="font-semibold text-on-surface">FC Yên Mỹ</span>
+                <span class="text-outline">•</span>
+                <a class="text-primary hover:underline" href="tel:0977222000">0977.222.xxx</a>
+              </div>
+            </div>
+            <div class="text-right flex flex-col items-end">
+              <span class="font-headline-sm text-headline-sm text-on-surface">550.000đ</span>
+              <span class="mt-1 px-2.5 py-0.5 rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm">
+                Đã thanh toán
+              </span>
+              <span class="text-primary font-label-sm text-label-sm mt-1 flex items-center gap-0.5">
+                <span class="material-symbols-outlined text-[14px]">done_all</span> Đã lên sân
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center justify-between p-2 rounded bg-surface-container-lowest">
+            <span class="font-label-sm text-label-sm text-primary flex items-center gap-1">
+              <span class="material-symbols-outlined text-[16px]">check_circle</span> ĐÃ CHECK-IN LÚC 17:55
+            </span>
+            <button class="px-3 py-1 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm" onclick="handleAction('detail', 'YP-803')" type="button">
+              Xem Chi Tiết
+            </button>
+          </div>
+        </div>
+
+        <!-- Booking 4: YP-804 -->
+        <div class="booking-card rounded-lg bg-surface-container p-space-md shadow-md flex flex-col space-y-space-sm" data-pitch="san1">
+          <div class="flex items-start justify-between gap-space-sm">
+            <div class="flex flex-col">
+              <div class="flex items-center gap-2">
+                <span class="font-headline-sm text-headline-sm text-primary">#YP-804</span>
+                <span class="px-2 py-0.5 rounded-full bg-surface-container-highest text-on-surface font-label-sm text-label-sm">
+                  Sân 1
+                </span>
+              </div>
+              <span class="font-headline-sm text-headline-sm text-on-surface mt-1">20:00 - 21:00</span>
+              <div class="flex items-center gap-1 text-on-surface-variant font-body-sm text-body-sm mt-0.5">
+                <span class="material-symbols-outlined text-[15px] text-secondary">groups</span>
+                <span class="font-semibold text-on-surface">FC Bình Phú</span>
+                <span class="text-outline">•</span>
+                <a class="text-primary hover:underline" href="tel:0934555000">0934.555.xxx</a>
+              </div>
+            </div>
+            <div class="text-right flex flex-col items-end">
+              <span class="font-headline-sm text-headline-sm text-on-surface">380.000đ</span>
+              <span class="mt-1 px-2.5 py-0.5 rounded-full bg-surface-container-highest text-on-surface font-label-sm text-label-sm">
+                Đã xác nhận
+              </span>
+              <span class="text-outline font-label-sm text-label-sm mt-1">Chờ cọc trực tiếp</span>
+            </div>
+          </div>
+          <div class="grid grid-cols-3 gap-space-xs pt-1">
+            <button class="py-2.5 rounded-full bg-primary text-on-primary font-label-md text-label-md flex items-center justify-center gap-1 shadow-sm active:scale-95 transition-transform" onclick="handleAction('checkin', 'YP-804')" type="button">
+              <span class="material-symbols-outlined text-[16px]">how_to_reg</span> Check-in
+            </button>
+            <button class="py-2.5 rounded-full bg-surface-container-highest text-on-surface font-label-md text-label-md flex items-center justify-center gap-1 hover:bg-surface-bright active:scale-95 transition-transform" onclick="handleAction('edit', 'YP-804')" type="button">
+              <span class="material-symbols-outlined text-[16px]">edit</span> Sửa
+            </button>
+            <button class="py-2.5 rounded-full bg-error-container text-on-error-container font-label-md text-label-md flex items-center justify-center gap-1 hover:opacity-90 active:scale-95 transition-transform" onclick="handleAction('cancel', 'YP-804')" type="button">
+              <span class="material-symbols-outlined text-[16px]">cancel</span> Hủy
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PITCH & SYSTEM SETTINGS PANEL -->
+      <div class="rounded-lg bg-surface-container-high p-space-md shadow-xl flex flex-col space-y-space-md">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+              <span class="material-symbols-outlined text-[20px]">tune</span>
+            </div>
+            <h2 class="font-headline-sm text-headline-sm text-on-surface">Cài Đặt Cụm Sân</h2>
+          </div>
+          <span class="font-label-sm text-label-sm text-primary uppercase">Tự động đồng bộ</span>
+        </div>
+
+        <!-- Price Configuration -->
+        <div class="flex flex-col space-y-space-xs">
+          <span class="font-label-md text-label-md text-on-surface uppercase">Biểu Giá Thuê Sân (Theo Khung Giờ)</span>
+          <div class="grid grid-cols-3 gap-2">
+            <div class="p-2.5 rounded-lg bg-surface-container-lowest flex flex-col justify-between">
+              <span class="font-label-sm text-label-sm text-on-surface-variant">Giờ Sáng (06-15h)</span>
+              <span class="font-headline-sm text-headline-sm text-primary mt-1">200k<span class="text-label-sm text-on-surface-variant font-normal">/h</span></span>
+            </div>
+            <div class="p-2.5 rounded-lg bg-surface-container-lowest flex flex-col justify-between">
+              <span class="font-label-sm text-label-sm text-on-surface-variant">Giờ Chiều (15-18h)</span>
+              <span class="font-headline-sm text-headline-sm text-primary mt-1">300k<span class="text-label-sm text-on-surface-variant font-normal">/h</span></span>
+            </div>
+            <div class="p-2.5 rounded-lg bg-surface-container-lowest flex flex-col justify-between">
+              <span class="font-label-sm text-label-sm text-tertiary">Giờ Vàng (18-22h)</span>
+              <span class="font-headline-sm text-headline-sm text-tertiary mt-1">380k<span class="text-label-sm text-on-surface-variant font-normal">/h</span></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Operating Hours -->
+        <div class="flex items-center justify-between p-3 rounded-lg bg-surface-container-lowest">
+          <div class="flex items-center gap-space-sm">
+            <span class="material-symbols-outlined text-primary text-[22px]">schedule</span>
+            <div class="flex flex-col">
+              <span class="font-label-md text-label-md text-on-surface">Thời Gian Mở Cửa</span>
+              <span class="font-body-sm text-body-sm text-on-surface-variant">Áp dụng tất cả các ngày trong tuần</span>
+            </div>
+          </div>
+          <div class="px-3 py-1 rounded-full bg-surface-container-high text-primary font-headline-sm text-headline-sm">
+            06:00 - 23:00
+          </div>
+        </div>
+
+        <!-- Maintenance Controls -->
+        <div class="flex flex-col space-y-space-xs">
+          <span class="font-label-md text-label-md text-on-surface uppercase">Bảo Trì &amp; Chiếu Sáng</span>
+          <div class="grid grid-cols-2 gap-space-sm">
+            <!-- Pitch 1 Switch -->
+            <div class="p-3 rounded-lg bg-surface-container-lowest flex flex-col justify-between space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="font-label-md text-label-md text-on-surface">Mặt Cỏ Sân 1</span>
+                <span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
+              </div>
+              <p class="font-body-sm text-body-sm text-on-surface-variant">Sẵn sàng đón trận</p>
+              <button class="w-full py-1.5 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm hover:bg-surface-bright transition-colors" onclick="toggleMaintenance(1, this)" type="button">
+                Chuyển: Bảo Trì
+              </button>
+            </div>
+            <!-- Pitch 2 Switch -->
+            <div class="p-3 rounded-lg bg-surface-container-lowest flex flex-col justify-between space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="font-label-md text-label-md text-on-surface">Dàn Đèn Sân 2</span>
+                <span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
+              </div>
+              <p class="font-body-sm text-body-sm text-on-surface-variant">Hoạt động bình thường</p>
+              <button class="w-full py-1.5 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm hover:bg-surface-bright transition-colors" onclick="toggleMaintenance(2, this)" type="button">
+                Chuyển: Bảo Trì
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- POPUP MODAL: QUICK ADD BOOKING -->
+      <div class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80 backdrop-blur-md" id="quickAddModal">
+        <div class="w-full max-w-sm rounded-lg bg-surface-container p-space-md shadow-2xl flex flex-col space-y-space-sm">
+          <div class="flex items-center justify-between">
+            <h3 class="font-headline-sm text-headline-sm text-on-surface">Đặt Sân Trực Tiếp</h3>
+            <button class="text-on-surface-variant hover:text-on-surface" id="btnCloseModal" type="button">
+              <span class="material-symbols-outlined text-[20px]">close</span>
+            </button>
+          </div>
+          <div class="flex flex-col space-y-2">
+            <div>
+              <label class="font-label-sm text-label-sm text-on-surface-variant uppercase">Chọn Sân</label>
+              <div class="grid grid-cols-2 gap-2 mt-1">
+                <button class="py-2 rounded-full bg-primary text-on-primary font-label-md text-label-md text-center modal-pitch-sel" data-val="1" type="button">Sân 1</button>
+                <button class="py-2 rounded-full bg-surface-container-highest text-on-surface font-label-md text-label-md text-center modal-pitch-sel" data-val="2" type="button">Sân 2</button>
+              </div>
+            </div>
+            <div>
+              <label class="font-label-sm text-label-sm text-on-surface-variant uppercase">Khách Hàng / Đội Bóng</label>
+              <input class="w-full mt-1 p-2.5 rounded-full bg-surface-container-lowest text-on-surface font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Nhập tên khách hoặc FC..." type="text"/>
+            </div>
+            <div>
+              <label class="font-label-sm text-label-sm text-on-surface-variant uppercase">Số Điện Thoại</label>
+              <input class="w-full mt-1 p-2.5 rounded-full bg-surface-container-lowest text-on-surface font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary" placeholder="09xx.xxx.xxx" type="tel"/>
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+              <div>
+                <label class="font-label-sm text-label-sm text-on-surface-variant uppercase">Bắt Đầu</label>
+                <input class="w-full mt-1 p-2 rounded-full bg-surface-container-lowest text-on-surface font-body-sm text-body-sm" type="time" value="18:00"/>
+              </div>
+              <div>
+                <label class="font-label-sm text-label-sm text-on-surface-variant uppercase">Kết Thúc</label>
+                <input class="w-full mt-1 p-2 rounded-full bg-surface-container-lowest text-on-surface font-body-sm text-body-sm" type="time" value="19:30"/>
+              </div>
+            </div>
+          </div>
+          <div class="pt-2">
+            <button class="w-full py-3 rounded-full bg-primary text-on-primary font-headline-sm text-headline-sm shadow-md active:scale-95 transition-transform" id="btnConfirmQuickAdd" type="button">
+              Lưu &amp; Giữ Sân Ngay
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TOAST FEEDBACK NOTIFICATION -->
+      <div class="fixed bottom-20 left-1/2 -translate-x-1/2 z-50 hidden px-4 py-2.5 rounded-full bg-primary text-on-primary font-headline-sm text-headline-sm shadow-2xl items-center gap-2" id="adminToast">
+        <span class="material-symbols-outlined text-[18px]">verified</span>
+        <span id="toastMsg">Thao tác thành công!</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- BOTTOM FIXED NAVIGATION -->
+  <nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_-4px_24px_rgba(0,0,0,0.6)]" data-active-classes="text-primary font-bold">
+    <div class="flex items-center justify-around h-16 px-space-xs">
+      <a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] py-1 px-2 text-on-surface-variant transition-colors hover:text-on-surface group" data-path="trang-chu" href="index.html">
+        <span class="material-symbols-outlined text-[24px] group-hover:scale-110 transition-transform">sports_soccer</span>
+        <span class="font-label-sm text-label-sm mt-1">Trang Chủ</span>
+      </a>
+      <a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] py-1 px-2 text-on-surface-variant transition-colors hover:text-on-surface group" data-path="lich-san" href="index.html#lich-san-section">
+        <span class="material-symbols-outlined text-[24px] group-hover:scale-110 transition-transform">calendar_month</span>
+        <span class="font-label-sm text-label-sm mt-1">Lịch Sân</span>
+      </a>
+      <a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] py-1 px-2 text-on-surface-variant transition-colors hover:text-on-surface group" data-path="dat-san" href="booking.html">
+        <span class="material-symbols-outlined text-[24px] group-hover:scale-110 transition-transform">assignment_add</span>
+        <span class="font-label-sm text-label-sm mt-1">Đặt Sân</span>
+      </a>
+      <a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] py-1 px-2 text-on-surface-variant transition-colors hover:text-on-surface group" data-path="quan-tri" href="admin.html">
+        <span class="material-symbols-outlined text-[24px] group-hover:scale-110 transition-transform">admin_panel_settings</span>
+        <span class="font-label-sm text-label-sm mt-1">Quản Trị</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- External JavaScript Files -->
+  <script src="js/api.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
+
