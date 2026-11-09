@@ -7,7 +7,7 @@
 
 const CONFIG = {
   // Địa chỉ API FastAPI backend
-  API_BASE_URL: "http://127.0.0.1:8000/api",
+  API_BASE_URL: "/api",
   
   // Thông tin thương hiệu sân bóng
   VENUE_NAME: "Sân bóng Nhà Máy Nước – Yên Phú",
