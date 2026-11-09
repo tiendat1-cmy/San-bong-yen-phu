@@ -35,9 +35,9 @@ def seed_database():
                 status="active"
             )
             pitch2 = Pitch(
-                pitch_name="Sân 2 (5-7 Pro)",
-                pitch_type="Sân 5-7 người linh hoạt",
-                description="Phù hợp thi đấu đối kháng 5-7 người, lưới chắn bóng an toàn, miễn phí 02 bình nước mát.",
+                pitch_name="Sân 2 (7 Pro)",
+                pitch_type="Sân 7 người linh hoạt",
+                description="Phù hợp thi đấu đối kháng 7 người, lưới chắn bóng an toàn, miễn phí 02 bình nước mát.",
                 price_per_hour=300000.0,
                 status="active"
             )
@@ -48,20 +48,28 @@ def seed_database():
             print("  [-] San bong da co san trong he thong.")
 
         # 2. Khởi tạo tài khoản Admin
-        admin_user = db.query(User).filter(User.phone == "0988123456").first()
+        admin_phone = os.getenv("ADMIN_PHONE", "0988123456")
+        admin_pass = os.getenv("ADMIN_PASSWORD", "admin123")
+        admin_name = os.getenv("ADMIN_NAME", "Admin Sân Yên Phú")
+        admin_email = os.getenv("ADMIN_EMAIL", "admin@sanbongyenphu.vn")
+
+        admin_user = db.query(User).filter(User.phone == admin_phone).first()
         if not admin_user:
             admin_user = User(
-                full_name="Admin Sân Yên Phú",
-                phone="0988123456",
-                email="admin@sanbongyenphu.vn",
-                password_hash=hash_password("admin123"),
+                full_name=admin_name,
+                phone=admin_phone,
+                email=admin_email,
+                password_hash=hash_password(admin_pass),
                 role="admin"
             )
             db.add(admin_user)
             db.commit()
-            print("  [+] Da tao tai khoan Admin: SDT: 0988123456 | Mat khau: admin123")
+            print(f"  [+] Da tao tai khoan Admin: SDT: {admin_phone} | Mat khau: {admin_pass}")
         else:
-            print("  [-] Tai khoan Admin da co san.")
+            # Đảm bảo role là admin và mật khẩu được băm chuẩn
+            admin_user.role = "admin"
+            db.commit()
+            print("  [-] Tai khoan Admin da co san trong he thong.")
 
         # 3. Tạo tài khoản khách hàng mẫu
         customer_user = db.query(User).filter(User.phone == "0912345678").first()
@@ -71,7 +79,7 @@ def seed_database():
                 phone="0912345678",
                 email="tuan@gmail.com",
                 password_hash=hash_password("123456"),
-                role="customer"
+                role="user"
             )
             db.add(customer_user)
             db.commit()
@@ -79,8 +87,8 @@ def seed_database():
 
         # 4. Tạo một vài đơn đặt sân mẫu cho ngày hôm nay
         today = datetime.now().date()
-        p1 = db.query(Pitch).filter(Pitch.pitch_name == "Sân 1 (7 Pro)").first()
-        p2 = db.query(Pitch).filter(Pitch.pitch_name == "Sân 2 (5-7 Pro)").first()
+        p1 = db.query(Pitch).filter((Pitch.id == 1) | (Pitch.pitch_name == "Sân 1 (7 Pro)")).first()
+        p2 = db.query(Pitch).filter((Pitch.id == 2) | (Pitch.pitch_name.like("%Sân 2%"))).first()
 
         if db.query(Booking).count() == 0 and p1 and p2:
             # Đơn 1

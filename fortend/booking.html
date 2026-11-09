@@ -23,7 +23,7 @@
     <header class="fixed top-0 w-full z-50 pt-safe bg-surface-container-lowest/85 backdrop-blur-xl shadow-[0_1px_16px_rgba(0,0,0,0.5)]">
       <div class="h-20 px-margin flex items-center justify-between gap-space-sm">
         <div class="flex items-center gap-space-sm min-w-0 flex-1">
-          <img alt="Logo Sói Vàng Nhà Máy Nước Yên Phú" class="h-8 w-auto object-contain flex-shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1UgUVqW7nvL3HgBco9Q7ra3lHM_KD1IEnJk8qc5pfvg6pyTV2ATZ0PRjJbtuRA_Swt-3KflxcL5LaCtlQUotr6Ks6ZFABfHaCBDn0x_4SpCodf-Dd_Ixmc4vN9my_QYMPaCGP_k8S4nr9a8d3ya158-hF7-fx-0BKmqAJApwIFcZlop46MVJJ1-dC_1zMtCnxZz9CCAGUkutP7FKSHxM3EFPVGBbb0eVw54G5MIqoXS" />
+          <img alt="Logo Sói Vàng Nhà Máy Nước Yên Phú" class="h-8 w-auto object-contain flex-shrink-0" src="assets/images/439343273_122140387460152065_8998464398296772982_n.jpg" />
           <div class="flex flex-col min-w-0">
             <div class="flex items-center gap-space-xs">
               <span class="font-headline-sm text-headline-sm text-primary uppercase tracking-tight truncate">Nhà Máy Nước</span>
@@ -39,17 +39,14 @@
             </div>
           </div>
         </div>
-        <div class="flex items-center gap-space-xs flex-shrink-0">
+        <div class="flex items-center gap-space-xs flex-shrink-0" id="header-user-area">
           <a aria-label="Hotline Đặt Sân" class="min-w-[44px] min-h-[44px] rounded-full flex items-center justify-center text-primary bg-surface-container-high/80 hover:bg-surface-container-highest transition-colors" href="tel:0988123456">
             <span class="material-symbols-outlined text-[20px]">call</span>
           </a>
-          <a aria-label="Thông báo" class="relative min-w-[44px] min-h-[44px] rounded-full flex items-center justify-center text-on-surface bg-surface-container-high/80 hover:bg-surface-container-highest transition-colors" href="#">
-            <span class="material-symbols-outlined text-[20px]">notifications</span>
-            <span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-primary ring-2 ring-surface-container-lowest animate-pulse"></span>
+          <a href="login.html" class="px-3.5 py-1.5 rounded-full bg-primary text-on-primary hover:bg-primary-fixed font-label-sm text-label-sm uppercase font-bold flex items-center gap-1 shadow-md shadow-primary/20 active:scale-95 transition-all">
+            <span class="material-symbols-outlined text-[16px]">login</span>
+            <span>Đăng Nhập</span>
           </a>
-          <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-[0_0_12px_rgba(133,224,47,0.35)] flex-shrink-0 ml-1">
-            <span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
-          </div>
         </div>
       </div>
     </header>
@@ -72,6 +69,45 @@
           <div class="flex items-center gap-space-xs opacity-50">
             <span class="w-6 h-6 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center font-label-sm text-label-sm">3</span>
             <span class="font-label-sm text-label-sm text-on-surface-variant">Vào Sân</span>
+          </div>
+        </div>
+                <!-- Chọn sân / ngày / giờ -->
+        <div class="bg-surface-container p-space-md rounded-lg space-y-space-md shadow-md">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary text-[22px]">event_available</span>
+            <h3 class="font-headline-sm text-headline-sm text-on-surface">Chọn Sân &amp; Khung Giờ</h3>
+          </div>
+
+          <div class="space-y-1">
+            <label class="font-label-sm text-label-sm uppercase text-on-surface-variant tracking-wider" for="pitch-select">Sân</label>
+            <select id="pitch-select" class="w-full h-12 px-3 bg-surface-container-lowest text-on-surface rounded-DEFAULT font-body-md focus:outline-none"></select>
+          </div>
+
+          <div class="space-y-1">
+            <label class="font-label-sm text-label-sm uppercase text-on-surface-variant tracking-wider" for="booking-date">Ngày đá</label>
+            <input id="booking-date" type="date" class="w-full h-12 px-3 bg-surface-container-lowest text-on-surface rounded-DEFAULT font-body-md focus:outline-none" />
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div class="space-y-1">
+              <label class="font-label-sm text-label-sm uppercase text-on-surface-variant tracking-wider" for="start-select">Giờ bắt đầu</label>
+              <select id="start-select" class="w-full h-12 px-3 bg-surface-container-lowest text-on-surface rounded-DEFAULT font-body-md focus:outline-none"></select>
+            </div>
+            <div class="space-y-1">
+              <label class="font-label-sm text-label-sm uppercase text-on-surface-variant tracking-wider" for="end-select">Giờ kết thúc</label>
+              <select id="end-select" class="w-full h-12 px-3 bg-surface-container-lowest text-on-surface rounded-DEFAULT font-body-md focus:outline-none"></select>
+            </div>
+          </div>
+
+          <!-- Trạng thái trống / đã đặt -->
+          <div id="availability-box" class="p-3 rounded-DEFAULT bg-surface-container-high font-body-sm text-body-sm text-on-surface-variant">
+            Đang kiểm tra khung giờ...
+          </div>
+
+          <!-- Các giờ đã có đội đặt -->
+          <div>
+            <p class="font-label-sm text-label-sm uppercase text-on-surface-variant tracking-wider mb-1.5">Giờ đã có đội đặt trong ngày</p>
+            <div id="booked-list" class="flex flex-wrap gap-1.5"></div>
           </div>
         </div>
 
@@ -105,45 +141,45 @@
           </div>
 
           <!-- Match Schedule Summary Matrix -->
-          <div class="p-space-md space-y-space-sm bg-surface-container">
-            <div class="grid grid-cols-2 gap-space-xs">
-              <div class="bg-surface-container-high p-space-sm rounded-DEFAULT flex items-center gap-2.5">
-                <div class="w-9 h-9 rounded-full bg-surface-variant flex items-center justify-center text-primary flex-shrink-0">
-                  <span class="material-symbols-outlined text-[18px]">calendar_today</span>
+          <div class="p-space-md space-y-3 bg-surface-container">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div class="bg-surface-container-high p-3 sm:p-3.5 rounded-DEFAULT flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-primary flex-shrink-0">
+                  <span class="material-symbols-outlined text-[20px]">calendar_today</span>
                 </div>
-                <div class="min-w-0">
-                  <span class="font-label-sm text-label-sm text-on-surface-variant block truncate">Ngày thi đấu</span>
-                  <span class="font-body-md text-body-md text-on-surface font-semibold truncate block" id="summary-date-display">Hôm nay</span>
+                <div class="min-w-0 flex-1">
+                  <span class="font-label-sm text-[11px] text-on-surface-variant uppercase tracking-wider block">Ngày thi đấu</span>
+                  <span class="font-body-md text-sm sm:text-base text-on-surface font-bold block leading-snug break-words" id="summary-date-display">Hôm nay</span>
                 </div>
               </div>
-              <div class="bg-surface-container-high p-space-sm rounded-DEFAULT flex items-center gap-2.5">
-                <div class="w-9 h-9 rounded-full bg-surface-variant flex items-center justify-center text-primary flex-shrink-0">
-                  <span class="material-symbols-outlined text-[18px]">schedule</span>
+              <div class="bg-surface-container-high p-3 sm:p-3.5 rounded-DEFAULT flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-primary flex-shrink-0">
+                  <span class="material-symbols-outlined text-[20px]">schedule</span>
                 </div>
-                <div class="min-w-0">
-                  <span class="font-label-sm text-label-sm text-on-surface-variant block truncate">Khung giờ đá</span>
-                  <span class="font-body-md text-body-md text-primary font-bold truncate block" id="summary-time-display">18:00 - 20:00</span>
+                <div class="min-w-0 flex-1">
+                  <span class="font-label-sm text-[11px] text-on-surface-variant uppercase tracking-wider block">Khung giờ đá</span>
+                  <span class="font-body-md text-sm sm:text-base text-primary font-bold block leading-snug break-words" id="summary-time-display">--:--</span>
                 </div>
               </div>
             </div>
 
             <!-- Cost Breakdown Table -->
-            <div class="bg-surface-container-lowest p-space-md rounded-DEFAULT space-y-2 mt-2">
-              <div class="flex justify-between items-center text-on-surface-variant font-body-sm text-body-sm">
+            <div class="bg-surface-container-lowest p-4 rounded-DEFAULT space-y-2.5 mt-2 border border-surface-container-high/60">
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 text-on-surface-variant font-body-sm text-xs sm:text-sm border-b border-surface-container-high/40 pb-2">
                 <span>Thời lượng thi đấu:</span>
-                <span class="font-label-md text-label-md text-on-surface" id="summary-duration">02 Giờ (Bật giàn LED cao áp)</span>
+                <span class="font-semibold text-on-surface" id="summary-duration">1 Giờ 30 phút (Bật giàn LED cao áp)</span>
               </div>
-              <div class="flex justify-between items-center text-on-surface-variant font-body-sm text-body-sm">
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 text-on-surface-variant font-body-sm text-xs sm:text-sm border-b border-surface-container-high/40 pb-2">
                 <span>Đơn giá áp dụng:</span>
-                <span id="summary-calc-price">380.000đ × 2 giờ</span>
+                <span class="font-medium text-on-surface" id="summary-calc-price">300</span>
               </div>
-              <div class="flex justify-between items-center text-on-surface-variant font-body-sm text-body-sm">
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 text-on-surface-variant font-body-sm text-xs sm:text-sm border-b border-surface-container-high/40 pb-2">
                 <span>Nước trà đá sân cỏ:</span>
-                <span class="text-primary font-label-sm text-label-sm">MIỄN PHÍ 02 BÌNH</span>
+                <span class="text-primary font-bold">MIỄN PHÍ 02 BÌNH</span>
               </div>
-              <div class="pt-2 flex justify-between items-baseline">
+              <div class="pt-2 flex flex-wrap items-baseline justify-between gap-2">
                 <span class="font-label-lg text-label-lg text-on-surface uppercase tracking-wide">Tổng chi phí sân:</span>
-                <span class="font-headline-md text-headline-md text-primary" id="summary-total-price">760.000đ</span>
+                <span class="font-headline-md text-headline-md text-primary font-bold" id="summary-total-price">--</span>
               </div>
             </div>
           </div>
@@ -204,50 +240,56 @@
           </div>
           <div class="grid grid-cols-1 gap-2.5" id="payment-options">
             <!-- Option 1: Direct Cash -->
-            <div class="cursor-pointer transition-all p-3.5 rounded-DEFAULT bg-surface-container-high hover:bg-surface-container-highest flex items-center justify-between" id="pay-opt-cash" onclick="selectPayment('cash')">
-              <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-primary">
+            <div class="cursor-pointer transition-all p-3.5 rounded-DEFAULT bg-surface-container-high hover:bg-surface-container-highest flex items-center justify-between gap-3" id="pay-opt-cash" onclick="selectPayment('cash')">
+              <div class="flex items-center gap-3 flex-1 min-w-0">
+                <div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-primary flex-shrink-0">
                   <span class="material-symbols-outlined text-[20px]">payments</span>
                 </div>
-                <div>
-                  <span class="font-body-md text-body-md text-on-surface font-semibold block">Tiền mặt tại sân Yên Phú</span>
-                  <span class="font-body-sm text-body-sm text-on-surface-variant block">Thanh toán trực tiếp cho ban quản lý khi nhận sân</span>
+                <div class="min-w-0 flex-1">
+                  <span class="font-body-md text-sm sm:text-base text-on-surface font-semibold block leading-snug">Tiền mặt tại sân Yên Phú</span>
+                  <span class="font-body-sm text-xs sm:text-sm text-on-surface-variant block mt-0.5 leading-relaxed">Thanh toán trực tiếp cho ban quản lý khi nhận sân</span>
                 </div>
               </div>
-              <div class="w-5 h-5 rounded-full bg-surface-variant flex items-center justify-center text-surface-variant" id="check-cash">
+              <div class="w-5 h-5 rounded-full bg-surface-variant flex items-center justify-center text-surface-variant flex-shrink-0" id="check-cash">
                 <span class="material-symbols-outlined text-[14px] font-bold">check</span>
               </div>
             </div>
 
             <!-- Option 2: Instant QR Transfer (Default active) -->
-            <div class="cursor-pointer transition-all p-3.5 rounded-DEFAULT bg-surface-container-lowest shadow-md flex items-center justify-between" id="pay-opt-qr" onclick="selectPayment('qr')">
-              <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center">
+            <div class="cursor-pointer transition-all p-3.5 rounded-DEFAULT bg-surface-container-lowest shadow-md flex items-center justify-between gap-3 border border-primary/20" id="pay-opt-qr" onclick="selectPayment('qr')">
+              <div class="flex items-center gap-3 flex-1 min-w-0">
+                <div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center flex-shrink-0">
                   <span class="material-symbols-outlined text-[20px]">qr_code_scanner</span>
                 </div>
-                <div>
-                  <div class="flex items-center gap-2">
-                    <span class="font-body-md text-body-md text-on-surface font-bold">Chuyển khoản QR Siêu Tốc</span>
-                    <span class="px-2 py-0.2 rounded-full bg-primary/20 text-primary font-label-sm text-label-sm">Khuyên dùng</span>
+                <div class="min-w-0 flex-1">
+                  <div class="flex flex-wrap items-center gap-2">
+                    <span class="font-body-md text-sm sm:text-base text-on-surface font-bold leading-snug">Chuyển khoản QR Siêu Tốc</span>
+                    <span class="px-2 py-0.5 rounded-full bg-primary/20 text-primary font-label-sm text-[11px] font-bold">Khuyên dùng</span>
                   </div>
-                  <span class="font-body-sm text-body-sm text-on-surface-variant block">Quét VietQR / MoMo - Khóa sân tức thì 100%</span>
+                  <span class="font-body-sm text-xs sm:text-sm text-on-surface-variant block mt-0.5 leading-relaxed">Quét VietQR / MoMo - Khóa sân tức thì 100%</span>
                 </div>
               </div>
-              <div class="w-5 h-5 rounded-full bg-primary text-on-primary flex items-center justify-center" id="check-qr">
+              <div class="w-5 h-5 rounded-full bg-primary text-on-primary flex items-center justify-center flex-shrink-0" id="check-qr">
                 <span class="material-symbols-outlined text-[14px] font-bold">check</span>
               </div>
             </div>
           </div>
 
           <!-- Real-time dynamic payment notice -->
-          <div class="p-space-sm bg-surface-container-lowest rounded-DEFAULT flex items-center gap-3" id="qr-bank-details">
-            <div class="w-14 h-14 bg-surface-container rounded-sm flex items-center justify-center p-1">
-              <span class="material-symbols-outlined text-[36px] text-primary">qr_code_2</span>
+          <div class="p-4 bg-surface-container-lowest rounded-DEFAULT border border-primary/20 flex flex-col sm:flex-row sm:items-center gap-3.5 shadow-sm" id="qr-bank-details">
+            <div class="w-14 h-14 sm:w-16 sm:h-16 bg-surface-container rounded-DEFAULT flex items-center justify-center p-2 flex-shrink-0 text-primary border border-surface-container-high">
+              <span class="material-symbols-outlined text-[36px]">qr_code_2</span>
             </div>
-            <div class="min-w-0">
-              <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide block">Tài khoản BQL Sân Yên Phú</span>
-              <span class="font-body-sm text-body-sm text-on-surface font-bold block truncate">MB BANK - 0988000000</span>
-              <span class="font-label-sm text-label-sm text-primary block truncate">Nội dung: SÂN 1 - TUẤN 04/11</span>
+            <div class="flex-1 min-w-0 flex flex-col gap-1">
+              <span class="font-label-sm text-[11px] text-on-surface-variant uppercase tracking-wider font-semibold block leading-tight">
+                Tài khoản BQL Sân Nhà Máy Nước Yên Phú
+              </span>
+              <div class="font-body-md text-sm sm:text-base text-on-surface font-bold leading-snug tracking-wide" id="qr-bank-account">
+                MB BANK • STK: 0988.123.456 (Chủ TK: ĐỖ TIẾN ĐẠT)
+              </div>
+              <div class="font-label-sm text-xs sm:text-sm text-primary font-semibold bg-primary/10 border border-primary/20 px-3 py-1.5 rounded-md leading-relaxed break-words mt-0.5" id="qr-bank-note">
+                Nội dung CK: SÂN 1 - TUẤN 04/11
+              </div>
             </div>
           </div>
         </div>

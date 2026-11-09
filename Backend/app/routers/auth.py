@@ -33,7 +33,7 @@ def register(user_in: UserRegister, db: Session = Depends(get_db)):
         phone=user_in.phone,
         email=user_in.email,
         password_hash=hash_password(user_in.password),
-        role="customer"
+        role="user"
     )
     db.add(new_user)
     db.commit()

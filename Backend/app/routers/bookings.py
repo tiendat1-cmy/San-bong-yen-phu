@@ -1,6 +1,7 @@
 from datetime import date, datetime
 from typing import List, Optional
-from fastapi import APIRouter, Depends, HTTPException, Query, status
+from fastapi import APIRouter, Depends, HTTPException, Query, status,BackgroundTasks
+from app.services.notification_service import notify_new_booking
 from sqlalchemy.orm import Session
 from app.database import get_db
 from app.models.pitch import Pitch
@@ -12,7 +13,8 @@ from app.services.booking_service import (
     parse_time_str, 
     validate_booking_time, 
     check_time_conflict, 
-    calculate_price, 
+    calculate_price,
+    price_breakdown, 
     generate_day_slots
 )
 from app.dependencies.auth import get_optional_current_user
@@ -48,10 +50,10 @@ def check_availability(
     end_time: str = Query(..., description="Giờ kết thúc (HH:MM)"),
     db: Session = Depends(get_db)
 ):
-    """Kiểm tra một khung giờ cụ thể còn trống hay đã có người đặt"""
+    """Kiểm tra một khung giờ cụ thể còn trống hay đã có người đặt, kèm giá"""
     pitch = db.query(Pitch).filter(Pitch.id == pitch_id).first()
     if not pitch:
-        raise HTTPException(status_code=404, detail="Không tìm thấy sân bóng.")
+        raise HTTPException(status_code=404, detail=f"Không tìm thấy sân bóng id={pitch_id}.")
 
     start_t = parse_time_str(start_time)
     end_t = parse_time_str(end_time)
@@ -65,12 +67,34 @@ def check_availability(
         "start_time": start_time,
         "end_time": end_time,
         "is_available": conflict is None,
-        "estimated_price": calculate_price(pitch, start_t, end_t)
+        "conflict": None if conflict is None else {
+            "start_time": conflict.start_time.strftime("%H:%M"),
+            "end_time": conflict.end_time.strftime("%H:%M"),
+        },
+        "estimated_price": calculate_price(pitch, start_t, end_t),
+        "breakdown": price_breakdown(start_t, end_t),
     }
+@router.get("/bookings/booked")
+def get_booked_ranges(
+    pitch_id: int = Query(..., description="ID sân bóng"),
+    booking_date: date = Query(..., description="Ngày cần xem"),
+    db: Session = Depends(get_db)
+):
+    """Danh sách các khoảng giờ đã có đội đặt trong ngày (không lộ thông tin người đặt)"""
+    rows = db.query(Booking).filter(
+        Booking.pitch_id == pitch_id,
+        Booking.booking_date == booking_date,
+        Booking.status != "cancelled"
+    ).order_by(Booking.start_time).all()
+    return [
+        {"start_time": b.start_time.strftime("%H:%M"), "end_time": b.end_time.strftime("%H:%M")}
+        for b in rows
+    ]
 
 @router.post("/bookings", response_model=BookingResponse, status_code=status.HTTP_201_CREATED)
 def create_booking(
     booking_in: BookingCreate,
+    background_tasks: BackgroundTasks,
     current_user: Optional[User] = Depends(get_optional_current_user),
     db: Session = Depends(get_db)
 ):
@@ -82,9 +106,20 @@ def create_booking(
     - Chống trùng lịch (Concurrency / Overlapping check).
     - Tính tổng tiền tự động ở server theo đơn giá sân.
     """
+    # 0. Yêu cầu đăng nhập tài khoản để chống tạo đơn rác
+    if not current_user:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Vui lòng đăng nhập tài khoản trước khi thực hiện đặt sân!"
+        )
+    
+
     pitch = db.query(Pitch).filter(Pitch.id == booking_in.pitch_id).first()
     if not pitch:
-        raise HTTPException(status_code=404, detail="Sân bóng không tồn tại!")
+        raise HTTPException(
+            status_code=404,
+            detail=f"Sân bóng id={booking_in.pitch_id} không tồn tại! (user={current_user.id})"
+        )
     if pitch.status == "maintenance":
         raise HTTPException(status_code=400, detail="Sân bóng này hiện đang bảo trì, vui lòng chọn sân khác!")
 
@@ -131,7 +166,18 @@ def create_booking(
     db.add(payment_rec)
     db.commit()
     db.refresh(new_booking)
-
+    background_tasks.add_task(notify_new_booking, {
+        "id": new_booking.id,
+        "pitch_name": pitch.pitch_name,
+        "booking_date": str(new_booking.booking_date),
+        "start_time": new_booking.start_time.strftime("%H:%M"),
+        "end_time": new_booking.end_time.strftime("%H:%M"),
+        "customer_name": new_booking.customer_name,
+        "customer_phone": new_booking.customer_phone,
+        "total_price": new_booking.total_price,
+        "payment_method": booking_in.payment_method,
+        "note": new_booking.note,
+    })
     # Đính kèm pitch_name để trả về response
     res = BookingResponse.model_validate(new_booking)
     res.pitch_name = pitch.pitch_name

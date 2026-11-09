@@ -11,7 +11,7 @@ class User(Base):
     phone = Column(String(20), unique=True, index=True, nullable=False)
     email = Column(String(100), unique=True, index=True, nullable=True)
     password_hash = Column(String(255), nullable=False)
-    role = Column(String(20), default="customer", nullable=False)  # "admin" hoặc "customer"
+    role = Column(String(20), default="user", nullable=False)  # "admin" hoặc "user" / "customer"
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
 
     # Quan hệ với bảng Bookings

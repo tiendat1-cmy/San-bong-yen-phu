@@ -108,7 +108,7 @@ class TestFootballPitchSystem(unittest.TestCase):
         )
         new_user = register(user_in=user_in, db=self.db)
         self.assertEqual(new_user.phone, "0933444555")
-        self.assertEqual(new_user.role, "customer")
+        self.assertEqual(new_user.role, "user")
 
         # Đăng nhập thành công
         login_res = login(credentials=UserLogin(login_id="0933444555", password="password123"), db=self.db)
@@ -157,7 +157,7 @@ class TestFootballPitchSystem(unittest.TestCase):
             customer_phone="0988111222",
             payment_method="qr"
         )
-        create_booking(booking_in=booking1, current_user=None, db=self.db)
+        create_booking(booking_in=booking1, current_user=self.customer, db=self.db)
 
         # Đội 2 cố gắng đặt đè khung giờ: 19:00 -> 20:30 trên cùng Sân 1
         booking2 = BookingCreate(
@@ -171,9 +171,26 @@ class TestFootballPitchSystem(unittest.TestCase):
         )
         # Phải bị chặn với mã lỗi HTTP 409 Conflict
         with self.assertRaises(HTTPException) as cm:
-            create_booking(booking_in=booking2, current_user=None, db=self.db)
+            create_booking(booking_in=booking2, current_user=self.customer, db=self.db)
         self.assertEqual(cm.exception.status_code, 409)
         self.assertIn("đã có đội đặt", cm.exception.detail)
+
+    def test_booking_requires_authentication(self):
+        """Kiểm tra chặn tạo đơn rác khi chưa đăng nhập (HTTP 401)"""
+        tomorrow = date.today() + timedelta(days=1)
+        booking = BookingCreate(
+            pitch_id=self.pitch.id,
+            booking_date=tomorrow,
+            start_time="18:00",
+            end_time="20:00",
+            customer_name="Khách Vãng Lai",
+            customer_phone="0988999888",
+            payment_method="cash"
+        )
+        with self.assertRaises(HTTPException) as cm:
+            create_booking(booking_in=booking, current_user=None, db=self.db)
+        self.assertEqual(cm.exception.status_code, 401)
+        self.assertIn("đăng nhập", cm.exception.detail)
 
     # ---------------- 5. TEST CHẶN ĐẶT NGÀY TRONG QUÁ KHỨ ----------------
     def test_prevent_past_booking(self):
@@ -187,7 +204,7 @@ class TestFootballPitchSystem(unittest.TestCase):
             customer_phone="0988123456"
         )
         with self.assertRaises(HTTPException) as cm:
-            create_booking(booking_in=past_booking, current_user=None, db=self.db)
+            create_booking(booking_in=past_booking, current_user=self.customer, db=self.db)
         self.assertEqual(cm.exception.status_code, 400)
         self.assertIn("quá khứ", cm.exception.detail)
 
@@ -202,7 +219,7 @@ class TestFootballPitchSystem(unittest.TestCase):
             customer_name="Anh Tuấn",
             customer_phone="0912345678"
         )
-        b = create_booking(booking_in=booking_in, current_user=None, db=self.db)
+        b = create_booking(booking_in=booking_in, current_user=self.customer, db=self.db)
         self.assertEqual(b.status, "pending")
 
         # Admin duyệt đơn thành confirmed

@@ -16,6 +16,8 @@ let selectedEndTime = "17:30";
 let selectedPrice = 450000;
 
 document.addEventListener("DOMContentLoaded", () => {
+  API.renderHeaderAuth();
+  API.renderNavAuth();
   initDynamicDates();
   setupDateSelectors();
   highlightActiveNav();
@@ -237,6 +239,32 @@ async function loadSlots() {
  * Chọn khung giờ đá trên ma trận
  */
 function selectSlot(element, startTime, endTime, price) {
+  // 1. Kiểm tra đăng nhập (Bảo vệ luồng đặt sân - chống nặc danh / đơn rác)
+  if (!API.isLoggedIn()) {
+    const bookingQuery = new URLSearchParams({
+      pitchId: currentPitchId,
+      pitchName: currentPitchName,
+      date: selectedDate,
+      start: startTime,
+      end: endTime,
+      price: price
+    }).toString();
+
+    // Lưu vào LocalStorage
+    localStorage.setItem(CONFIG.STORAGE_KEYS.CURRENT_BOOKING, JSON.stringify({
+      pitchId: currentPitchId,
+      pitchName: currentPitchName,
+      date: selectedDate,
+      startTime: startTime,
+      endTime: endTime,
+      price: price
+    }));
+
+    // Chuyển hướng tới trang Đăng nhập kèm link quay lại
+    window.location.href = `login.html?redirect=${encodeURIComponent("booking.html?" + bookingQuery)}`;
+    return;
+  }
+
   document.querySelectorAll(".slot-card").forEach((el) => {
     el.classList.remove("bg-secondary-container", "ring-2", "ring-primary");
     el.classList.add("bg-surface-container");
@@ -256,6 +284,15 @@ function selectSlot(element, startTime, endTime, price) {
   if (summaryPitch) summaryPitch.textContent = currentPitchName;
   if (summaryTime) summaryTime.textContent = `${startTime} - ${endTime}`;
   if (summaryPrice) summaryPrice.textContent = UTILS.formatPrice(price);
+
+  // Tự động điền họ tên và số điện thoại của người dùng đã đăng nhập vào form Drawer
+  const user = API.getStoredUser();
+  if (user) {
+    const nameInput = document.getElementById("cust-name");
+    const phoneInput = document.getElementById("cust-phone");
+    if (nameInput && !nameInput.value) nameInput.value = user.full_name || "";
+    if (phoneInput && !phoneInput.value) phoneInput.value = user.phone || "";
+  }
 
   openDrawer();
 }
@@ -277,6 +314,13 @@ function closeDrawer() {
  * Xác nhận gửi đặt sân từ Drawer trang chủ lên Backend
  */
 async function confirmBooking() {
+  // 1. Kiểm tra đăng nhập
+  if (!API.isLoggedIn()) {
+    alert("Vui lòng đăng nhập tài khoản trước khi hoàn tất đặt sân!");
+    goToDetailedBooking();
+    return;
+  }
+
   const nameInput = document.getElementById("cust-name");
   const phoneInput = document.getElementById("cust-phone");
   const noteInput = document.getElementById("cust-note");
@@ -288,14 +332,14 @@ async function confirmBooking() {
   const phone = phoneInput ? phoneInput.value.trim().replace(/\s+/g, "") : "";
   const note = noteInput ? noteInput.value.trim() : "";
 
-  // 1. Kiểm tra họ tên
+  // Kiểm tra họ tên
   if (!name || name.length < 2) {
     alert("Vui lòng nhập Họ tên Đội trưởng / Người đặt (tối thiểu 2 ký tự)!");
     if (nameInput) nameInput.focus();
     return;
   }
 
-  // 2. Kiểm tra số điện thoại (9 đến 15 chữ số)
+  // Kiểm tra số điện thoại (9 đến 15 chữ số)
   const phoneRegex = /^[0-9]{9,15}$/;
   if (!phone || !phoneRegex.test(phone)) {
     alert("Số điện thoại không hợp lệ! Vui lòng nhập từ 9 đến 15 chữ số.");
@@ -325,8 +369,6 @@ async function confirmBooking() {
 
     // Thành công -> Đóng drawer, reset form
     closeDrawer();
-    if (nameInput) nameInput.value = "";
-    if (phoneInput) phoneInput.value = "";
     if (noteInput) noteInput.value = "";
 
     // Hiển thị Toast thông báo kèm mã đơn thật từ Database
@@ -369,7 +411,12 @@ function goToDetailedBooking() {
     end: selectedEndTime,
     price: selectedPrice
   });
-  window.location.href = `booking.html?${params.toString()}`;
+
+  if (!API.isLoggedIn()) {
+    window.location.href = `login.html?redirect=${encodeURIComponent("booking.html?" + params.toString())}`;
+  } else {
+    window.location.href = `booking.html?${params.toString()}`;
+  }
 }
 
 /**
